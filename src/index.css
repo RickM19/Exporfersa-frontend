@@ -1,0 +1,245 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+@import "tailwindcss";
+
+/* =========================================
+   DESIGN SYSTEM — EXPORFERSA
+   Tailwind CSS v4
+========================================= */
+
+@theme {
+  /* -------------------------------------
+       TIPOGRAFIA
+    ------------------------------------- */
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  /* -------------------------------------
+       PALETA INSTITUCIONAL
+    ------------------------------------- */
+
+  /* Azul-marinho */
+  --color-primary-50: #eff4f9;
+  --color-primary-100: #dce7f1;
+  --color-primary-200: #bed1e3;
+  --color-primary-300: #91b2d0;
+  --color-primary-400: #5e8db8;
+  --color-primary-500: #376c9b;
+  --color-primary-600: #234f7c;
+  --color-primary-700: #163e65;
+  --color-primary-800: #102d4f;
+  --color-primary-900: #0b203a;
+  --color-primary-950: #061426;
+
+  /* Azul de ação */
+  --color-secondary-50: #eff6ff;
+  --color-secondary-100: #dbeafe;
+  --color-secondary-200: #bfdbfe;
+  --color-secondary-300: #93c5fd;
+  --color-secondary-400: #60a5fa;
+  --color-secondary-500: #3b82f6;
+  --color-secondary-600: #1763c0;
+  --color-secondary-700: #1552a0;
+  --color-secondary-800: #164484;
+  --color-secondary-900: #153968;
+  --color-secondary-950: #102447;
+
+  /* -------------------------------------
+       CORES SEMÂNTICAS
+    ------------------------------------- */
+
+  --color-primary: #102d4f;
+  --color-primary-hover: #163e65;
+  --color-primary-foreground: #ffffff;
+
+  --color-secondary: #1763c0;
+  --color-secondary-hover: #1552a0;
+  --color-secondary-foreground: #ffffff;
+
+  --color-accent: #e9f2fc;
+  --color-accent-foreground: #163e65;
+
+  /* -------------------------------------
+       BACKGROUNDS E SUPERFÍCIES
+    ------------------------------------- */
+
+  --color-background: #f5f7fa;
+  --color-surface: #ffffff;
+  --color-surface-secondary: #f8fafc;
+  --color-surface-hover: #f1f5f9;
+
+  /* -------------------------------------
+       TEXTOS
+    ------------------------------------- */
+
+  --color-foreground: #102d4f;
+  --color-text-primary: #102d4f;
+  --color-text-secondary: #64748b;
+  --color-muted: #94a3b8;
+  --color-muted-foreground: #64748b;
+
+  /* -------------------------------------
+       BORDAS E INPUTS
+    ------------------------------------- */
+
+  --color-border: #d4d8de;
+  --color-border-subtle: #e8edf3;
+  --color-input: #d4d8de;
+  --color-ring: #1763c0;
+
+  /* -------------------------------------
+       ESTADOS / FEEDBACK
+    ------------------------------------- */
+
+  /* Sucesso */
+  --color-success-50: #ecfdf3;
+  --color-success-100: #d1fae0;
+  --color-success-500: #22a06b;
+  --color-success-600: #168451;
+  --color-success: #168451;
+  --color-success-foreground: #ffffff;
+
+  /* Aviso */
+  --color-warning-50: #fffbeb;
+  --color-warning-100: #fef3c7;
+  --color-warning-500: #eab308;
+  --color-warning-600: #b7791f;
+  --color-warning: #b7791f;
+  --color-warning-foreground: #ffffff;
+
+  /* Erro */
+  --color-danger-50: #fef2f2;
+  --color-danger-100: #fee2e2;
+  --color-danger-500: #ef4444;
+  --color-danger-600: #dc2626;
+  --color-danger: #dc2626;
+  --color-danger-foreground: #ffffff;
+
+  /* Informação */
+  --color-info-50: #eff6ff;
+  --color-info-100: #dbeafe;
+  --color-info-500: #3b82f6;
+  --color-info-600: #2563eb;
+  --color-info: #2563eb;
+  --color-info-foreground: #ffffff;
+
+  /* -------------------------------------
+       CATEGORIAS DE PROJETOS
+    ------------------------------------- */
+
+  --color-category-agrarian: #16a34a;
+  --color-category-engineering: #d97706;
+  --color-category-humanas: #8b5cf6;
+  --color-category-exatas: #2563eb;
+  --color-category-biological: #0d9488;
+  --color-category-health: #e11d48;
+
+  /* -------------------------------------
+       RADIUS
+    ------------------------------------- */
+
+  --radius-xs: 0.25rem;
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.25rem;
+  --radius-3xl: 1.5rem;
+
+  /* -------------------------------------
+       SOMBRAS
+    ------------------------------------- */
+
+  --shadow-card: 0 1px 3px rgb(16 45 79 / 6%), 0 1px 2px rgb(16 45 79 / 4%);
+
+  --shadow-dropdown: 0 4px 12px rgb(16 45 79 / 10%);
+
+  --shadow-modal: 0 20px 50px rgb(16 45 79 / 16%);
+
+  --shadow-focus: 0 0 0 3px rgb(23 99 192 / 20%);
+}
+
+/* =========================================
+   DARK MODE
+========================================= */
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+.dark {
+  color-scheme: dark;
+
+  --color-background: #0b1422;
+  --color-surface: #142235;
+  --color-surface-secondary: #192b42;
+  --color-surface-hover: #203650;
+
+  --color-foreground: #f1f5f9;
+  --color-text-primary: #f1f5f9;
+  --color-text-secondary: #a7b6c8;
+  --color-muted: #8497ad;
+  --color-muted-foreground: #a7b6c8;
+
+  --color-border: #2c4058;
+  --color-border-subtle: #23364c;
+  --color-input: #344b65;
+  --color-ring: #60a5fa;
+
+  --color-primary: #91b2d0;
+  --color-primary-hover: #bed1e3;
+  --color-primary-foreground: #0b1422;
+
+  --color-secondary: #60a5fa;
+  --color-secondary-hover: #93c5fd;
+  --color-secondary-foreground: #0b1422;
+
+  --color-accent: #1d3551;
+  --color-accent-foreground: #bfdbfe;
+
+  --shadow-card: 0 1px 3px rgb(0 0 0 / 20%);
+  --shadow-dropdown: 0 4px 12px rgb(0 0 0 / 30%);
+  --shadow-modal: 0 20px 50px rgb(0 0 0 / 40%);
+}
+
+/* =========================================
+   BASE STYLES
+========================================= */
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    font-family: var(--font-sans);
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    min-height: 100vh;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  button {
+    @apply cursor-pointer;
+  }
+
+  button:disabled {
+    @apply cursor-not-allowed opacity-50;
+  }
+
+  ::selection {
+    background-color: var(--color-secondary);
+    color: white;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 2px;
+  }
+}
