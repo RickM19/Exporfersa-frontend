@@ -1,5 +1,9 @@
+import EventContainer from "../components/events/EventContainer";
+
 const Home = () => {
-  return <h1>Página Inicial!</h1>;
+  return (
+    <EventContainer />
+  );
 };
 
 export { Home };
