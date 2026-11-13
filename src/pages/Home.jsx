@@ -1,5 +1,11 @@
+import ProjectContainer from "../components/projects/ProjectContainer";
+
 const Home = () => {
-  return <h1>Página Inicial!</h1>;
+  return (
+    <>
+      <ProjectContainer />
+    </>
+  );
 };
 
 export { Home };
