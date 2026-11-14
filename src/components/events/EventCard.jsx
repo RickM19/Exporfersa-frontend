@@ -1,4 +1,5 @@
-import { CalendarDays, Clock, MapPin } from "lucide-react";
+import Button from "../UI/Button";
+import { ArrowRight, CalendarDays, Clock, MapPin } from "lucide-react";
 
 const EventCard = ({eventId, imageUrl, name, date, time, place, manage}) => {
     const eventUrl = eventId;
@@ -16,11 +17,11 @@ const EventCard = ({eventId, imageUrl, name, date, time, place, manage}) => {
                         <span className="flex items-center"><Clock className="mr-1 size-5" />{time}</span>
                     </div>
                     <p className="flex mb-2 text-xs"><MapPin className="mr-1 size-5" />{place}</p>
-                    <a className={`text-sm text-secondary flex items-center ${!manage && 'p-4 border-2 border-secondary rounded-md'}`} href={eventUrl}>Visualizar projeto</a>
+                    <a className={`text-sm text-secondary flex items-center ${!manage && 'p-4 border-2 border-secondary rounded-md'}`} href={eventUrl}>Visualizar evento<ArrowRight className="size-5 ml-1" /></a>
                     {manage &&
                         (<div className="mt-2 flex gap-2">
-                            <button className="w-[50%] text-secondary p-3 border-2 border-secondary rounded-md hover:text-white hover:bg-secondary transition-all">Editar</button>
-                            <button className="w-[50%] text-white p-3 border-2 border-danger bg-danger rounded-md hover:bg-red-800 hover:border-red-800 transition-all">Excluir</button>
+                            <Button width='[50%]' type='secondary' value='Editar' />
+                            <Button width='[50%]' type='destructive' value='Excluir' />
                         </div>)
                     }
                 </div>
