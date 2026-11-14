@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import Button from "../UI/Button";
 
 const ProjectCard = ({imageUrl, category, title, eventName, description, projectId, status, manage}) => {
     const projectUrl = projectId;
@@ -17,8 +18,8 @@ const ProjectCard = ({imageUrl, category, title, eventName, description, project
                     <a className="text-sm text-secondary flex items-center cursor-pointer" href={projectUrl}>Visualizar projeto <ArrowRight className="size-5 ml-1" /></a>
                     {manage &&
                         (<div className="mt-2 flex gap-2">
-                            <button className="w-[50%] text-secondary p-3 border-2 border-secondary rounded-md hover:text-white hover:bg-secondary transition-all">Editar</button>
-                            <button className="w-[50%] text-white p-3 border-2 border-danger bg-danger rounded-md hover:bg-red-800 hover:border-red-800 transition-all">Excluir</button>
+                            <Button value='Editar' type='secondary' width='[50%]' />
+                            <Button value='Excluir' type='destructive' width='[50%]' />
                         </div>)
                     }
                 </div>
