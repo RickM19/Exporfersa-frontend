@@ -7,12 +7,13 @@ const Home = () => {
   return (
     <>
       <Card>
-        <span>Exporfersa</span>
-        <h1>Explore eventos e projetos</h1>
-        <p>Acesse os eventos e conheça os projetos apresentados na plataforma</p>
-        <Button value='Explorar eventos' type='primary' />
-        <Button value='Explorar projetos' type='secondary' />
-        <Button value='Explorar projetos' type='destructive' />
+        <span className="text-secondary text-xs uppercase">Exporfersa</span>
+        <h1 className="text-2xl font-bold my-2">Explore eventos e projetos</h1>
+        <p className="text-xs text-muted">Acesse os eventos e conheça os projetos apresentados na plataforma</p>
+        <div className="mt-4 flex gap-2">
+          <Button value='Explorar eventos' type='primary' />
+          <Button value='Explorar projetos' type='secondary' />
+        </div>
       </Card>
       <EventContainer />
       <ProjectContainer />
