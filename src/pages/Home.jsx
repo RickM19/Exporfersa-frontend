@@ -8,8 +8,8 @@ import { NavLink } from "react-router-dom";
 const Home = ({ projects, events }) => {
   return (
     <>
-      <div className="p-5">
-        <Card>
+      <div>
+        <Card width="w-full">
           <span className="text-secondary text-xs uppercase">Exporfersa</span>
           <h1 className="text-2xl font-bold my-2">
             Explore eventos e projetos
