@@ -3,12 +3,12 @@ import { Navbar } from "./Navbar";
 
 const Content = () => {
   return (
-    <>
+    <div className="min-h-screen">
       <Navbar />
-      <div className="pt-20">
+      <main className="pt-20 h-full">
         <Outlet />
-      </div>
-    </>
+      </main>
+    </div>
   );
 };
 

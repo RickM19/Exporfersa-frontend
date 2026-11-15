@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import Button from "./UI/Button";
 
 const Navbar = () => {
   return (
@@ -34,7 +35,6 @@ const Navbar = () => {
                     : "text-text-secondary border-transparent"
                 }`
               }
-              end
             >
               Projetos
             </NavLink>
@@ -49,7 +49,6 @@ const Navbar = () => {
                     : "text-text-secondary border-transparent"
                 }`
               }
-              end
             >
               Eventos
             </NavLink>
@@ -58,9 +57,9 @@ const Navbar = () => {
       </div>
       <div>
         <NavLink to={"/login"} end>
-          <button className="bg bg-secondary px-4 py-3 text-surface rounded-md font-semibold">
+          <Button value={"Login"} className="font-semibold text-base">
             Login
-          </button>
+          </Button>
         </NavLink>
       </div>
     </nav>
