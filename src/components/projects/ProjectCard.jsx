@@ -44,8 +44,8 @@ const ProjectCard = ({
           </NavLink>
           {manage && (
             <div className="mt-2 flex gap-2">
-              <Button value="Editar" type="secondary" width="[50%]" />
-              <Button value="Excluir" type="destructive" width="[50%]" />
+              <Button value="Editar" type="secondary" width="w-1/2" />
+              <Button value="Excluir" type="destructive" width="w-1/2" />
             </div>
           )}
         </div>

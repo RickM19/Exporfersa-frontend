@@ -55,8 +55,8 @@ const EventCard = ({
           </NavLink>
           {manage && (
             <div className="mt-2 flex gap-2">
-              <Button width="[50%]" type="secondary" value="Editar" />
-              <Button width="[50%]" type="destructive" value="Excluir" />
+              <Button width="w-1/2" type="secondary" value="Editar" />
+              <Button width="w-1/2" type="destructive" value="Excluir" />
             </div>
           )}
         </div>
