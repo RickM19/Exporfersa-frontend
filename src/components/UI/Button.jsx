@@ -8,7 +8,9 @@ const variants = {
     "text-secondary bg-white border-secondary hover:bg-secondary hover:text-white",
 
   destructive:
-    "text-white border-danger bg-danger hover:bg-red-800 hover:border-red-800"
+    "text-white border-danger bg-danger hover:bg-red-800 hover:border-red-800",
+
+  ghost: "text-secondary border-transparent"
 };
 
 const Button = ({ type = "primary", value, width, className, ...props }) => {
