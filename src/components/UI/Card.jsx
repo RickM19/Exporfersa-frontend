@@ -1,14 +1,20 @@
-const Card = ({children, width, height}) => {
-    return (
-        <div
-            style={{
-                width: width || "max-content",
-                height: height || "max-content"
-            }}
-            className={"bg-white rounded-xl p-4 shadow"}>
-            {children}
-        </div>
-    );
+import { cn } from "../../lib/cn";
+
+const Card = ({
+  children,
+  className,
+  width = "w-max",
+  height = "h-max",
+  ...props
+}) => {
+  return (
+    <div
+      className={cn("bg-white rounded-xl p-4 shadow", width, height, className)}
+      {...props}
+    >
+      {children}
+    </div>
+  );
 };
 
 export default Card;
