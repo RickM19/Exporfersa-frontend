@@ -15,7 +15,7 @@ const EditEvent = ({eventoAntigo}) => {
   return (
     <div className="flex justify-center items-center h-full w-full">
       <Form
-        width="w-1/2"
+        width="xl:w-1/2 md:w-3/4 sm:w-[100%]"
         title="Editar evento"
         description="Atualize as informações do evento da sua instituição."
         action="Salvar edição"
