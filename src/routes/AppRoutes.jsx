@@ -9,6 +9,7 @@ import { NotFound } from "../pages/NotFound";
 import { Home } from "../pages/Home";
 import EditEvent from "../pages/events/EditEvent";
 import CreateProject from "../pages/projects/CreateProject";
+import EditProject from "../pages/projects/EditProject";
 
 const AppRoutes = () => {
   const [projects, setProjects] = useState(mockProjects);
@@ -19,7 +20,8 @@ const AppRoutes = () => {
       <Routes>
         <Route path="/" element={<Content />}>
           <Route index element={<Home projects={projects} events={events} />} />
-          <Route path="/admin/projetos/criar" element={<CreateProject />} />
+          <Route path="/projetos/criar" element={<CreateProject />} />
+          <Route path="/projetos/editar" element={<EditProject projetoAntigo={{name: "Projeto 1", event: "Evento 1", description: "lorem ipsum dolor sit amet", videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"}} />} />
           <Route path="/admin/eventos/criar" element={<CreateEvent />} />
           <Route path="/admin/eventos/1/editar" element={<EditEvent eventoAntigo={{name: "Evento 1", place: "Rua do limoeiro, 210", date: "2026-11-17", time: "15:07", description: "lorem ipsum dolor sit amet"}} />} />
           <Route path="*" element={<NotFound />} />
