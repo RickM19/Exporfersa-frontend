@@ -14,6 +14,7 @@ import ViewProjects from "../pages/projects/ViewProjects";
 import ProjectPage from "../pages/projects/ProjectPage";
 import ManageProjects from "../pages/projects/ManageProjects";
 import ViewEvents from "../pages/events/ViewEvents";
+import EventPage from "../pages/events/EventPage";
 
 const AppRoutes = () => {
   const [projects, setProjects] = useState(mockProjects);
@@ -33,6 +34,7 @@ const AppRoutes = () => {
           <Route path="/admin/eventos/criar" element={<CreateEvent />} />
           <Route path="/admin/eventos/1/editar" element={<EditEvent />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="/eventos/1" element={<EventPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
