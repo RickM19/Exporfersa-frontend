@@ -12,6 +12,7 @@ import CreateProject from "../pages/projects/CreateProject";
 import EditProject from "../pages/projects/EditProject";
 import ViewProjects from "../pages/projects/ViewProjects";
 import ProjectPage from "../pages/projects/ProjectPage";
+import ManageProjects from "../pages/projects/ManageProjects";
 
 const AppRoutes = () => {
   const [projects, setProjects] = useState(mockProjects);
@@ -23,6 +24,7 @@ const AppRoutes = () => {
         <Route path="/" element={<Content />}>
           <Route index element={<Home projects={projects} events={events} />} />
           <Route path="/projetos" element={<ViewProjects projects={projects} />} />
+          <Route path="/meus-projetos" element={<ManageProjects projects={projects} />} />
           <Route path="/projetos/criar" element={<CreateProject />} />
           <Route path="/projetos/1/editar" element={<EditProject />} />
           <Route path="/projetos/1" element={<ProjectPage />} />
