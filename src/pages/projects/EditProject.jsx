@@ -3,7 +3,9 @@ import Form from "../../components/Form";
 import Field from "../../components/UI/Field";
 import Input from "../../components/UI/Input";
 
-const EditProject = ({projetoAntigo}) => {
+const EditProject = () => {
+  const projetoAntigo={name: "Projeto 1", event: "Evento 1", description: "lorem ipsum dolor sit amet", videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"}
+
   const [formData, setFormData] = useState(projetoAntigo);
 
   const handleChange = (e) => {

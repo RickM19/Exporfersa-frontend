@@ -2,7 +2,8 @@ import { useState } from "react";
 import Form from "../../components/Form";
 import Input from "../../components/UI/Input";
 
-const EditEvent = ({eventoAntigo}) => {
+const EditEvent = () => {
+  const eventoAntigo={name: "Evento 1", place: "Rua do limoeiro, 210", date: "2026-11-17", time: "15:07", description: "lorem ipsum dolor sit amet"}
   const [formData, setFormData] = useState(eventoAntigo);
 
   const handleChange = (e) => {
