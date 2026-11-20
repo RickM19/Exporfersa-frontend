@@ -16,7 +16,7 @@ const ProjectCard = ({
   const projectUrl = `/projetos/${projectId}`;
   return (
     <>
-      <div className="shadow-md rounded-xl max-w-150 overflow-hidden">
+      <div className="shadow-md rounded-xl max-w-150 overflow-hidden bg-white">
         <img
           src={imageUrl || defaultProjectImage}
           alt={`Imagem do projeto ${title}`}
