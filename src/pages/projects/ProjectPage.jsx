@@ -6,15 +6,14 @@ const ProjectPage = () => {
   return (
     <>
     <main className="flex gap-4 flex-col">
-      
-        <section className="flex flex-col gap-4">
+        <section className="flex flex-col gap-4 mb-4">
             <span className="text-sm text-muted block">Inicio / Detalhes do projeto</span>
             <h1 className="text-2xl font-bold">Título do projeto</h1>
             <h2 className="text-xl font-bold">Resumo</h2>
             <p className="text-sm text-shadow-muted-foreground">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem rerum minus non amet saepe, possimus a! Ipsam reprehenderit vitae debitis?</p>
         </section>
         <section>
-            <h2 className="text-xl font-bold my-6">Apresentação em vídeo</h2>
+            <h2 className="text-xl font-bold mb-4">Apresentação em vídeo</h2>
             <iframe
                 src="https://www.youtube.com/embed/uXWycyeTeCs"
                 title="A YouTube video on React hooks"

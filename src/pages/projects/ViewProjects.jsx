@@ -11,7 +11,7 @@ const ViewProjects = ({ projects }) => {
   
   return (
     <>
-      <div>
+      <main className="flex flex-col gap-6">
         <div className="flex gap-4 flex-col">
           <span className="text-sm text-muted block">Inicio / Projetos</span>
           <span className="text-secondary uppercase text-sm">Explorar</span>
@@ -30,21 +30,23 @@ const ViewProjects = ({ projects }) => {
             </div>
           </div>
         </Card>
-        <h2 className="text-xl font-bold my-6">Projetos cadastrados</h2>
-        <GridContainer>
-          {projects.slice(0, 3).map((project) => (
-            <ProjectCard
-              key={project.id}
-              projectId={project.id}
-              title={project.projectName}
-              category={project.category}
-              eventName="Evento"
-              summary={project.summary}
-              status={"APROVADO"}
-            />
-          ))}
-        </GridContainer>
-      </div>
+        <section>
+          <h2 className="text-xl font-bold mb-4">Projetos cadastrados</h2>
+          <GridContainer>
+            {projects.slice(0, 3).map((project) => (
+              <ProjectCard
+                key={project.id}
+                projectId={project.id}
+                title={project.projectName}
+                category={project.category}
+                eventName="Evento"
+                summary={project.summary}
+                status={"APROVADO"}
+              />
+            ))}
+          </GridContainer>
+        </section>
+      </main>
     </>
   );
 };

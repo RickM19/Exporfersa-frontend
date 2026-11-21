@@ -16,7 +16,7 @@ const ProjectCard = ({
   const projectUrl = `/projetos/${projectId}`;
   return (
     <>
-      <div className="shadow-md rounded-xl max-w-150 overflow-hidden">
+      <div className="shadow-md rounded-xl max-w-150 overflow-hidden bg-white">
         <img
           src={imageUrl || defaultProjectImage}
           alt={`Imagem do projeto ${title}`}
@@ -34,8 +34,8 @@ const ProjectCard = ({
             )}
           </div>
           <h1 className="text-l font-bold mb-1">{title}</h1>
-          <p className="text-xs mb-1">Nome do evento - {eventName}</p>
-          <p className="text-xs mb-2">{summary}</p>
+          <p className="text-xs text-muted-foreground mb-1">Nome do evento - {eventName}</p>
+          <p className="text-xs text-muted mb-2">{summary}</p>
           <NavLink
             className="text-sm text-secondary flex items-center cursor-pointer"
             to={projectUrl}
