@@ -12,6 +12,7 @@ import CreateProject from "../pages/projects/CreateProject";
 import EditProject from "../pages/projects/EditProject";
 import ViewProjects from "../pages/projects/ViewProjects";
 import ProjectPage from "../pages/projects/ProjectPage";
+import { ProtectedRoute } from "../components/routes/ProtectedRoute";
 
 const AppRoutes = () => {
   const [projects, setProjects] = useState(mockProjects);
@@ -22,12 +23,22 @@ const AppRoutes = () => {
       <Routes>
         <Route path="/" element={<Content />}>
           <Route index element={<Home projects={projects} events={events} />} />
-          <Route path="/projetos" element={<ViewProjects projects={projects} />} />
-          <Route path="/projetos/criar" element={<CreateProject />} />
-          <Route path="/projetos/1/editar" element={<EditProject />} />
-          <Route path="/projetos/1" element={<ProjectPage />} />
-          <Route path="/admin/eventos/criar" element={<CreateEvent />} />
-          <Route path="/admin/eventos/1/editar" element={<EditEvent />} />
+          <Route
+            path="/projetos"
+            element={<ViewProjects projects={projects} />}
+          />
+          <Route path="projetos/:id" element={<ProjectPage />} />
+
+          <Route element={<ProtectedRoute />}>
+            <Route path="projetos/criar" element={<CreateProject />} />
+            <Route path="projetos/:id/editar" element={<EditProject />} />
+          </Route>
+
+          <Route element={<ProtectedRoute roles={["ADMIN"]} />}>
+            <Route path="admin/eventos/criar" element={<CreateEvent />} />
+            <Route path="admin/eventos/:id/editar" element={<EditEvent />} />
+          </Route>
+
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
