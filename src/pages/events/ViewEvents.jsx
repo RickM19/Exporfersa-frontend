@@ -12,7 +12,13 @@ const ViewEvents = ({ events }) => {
           <span className="text-secondary uppercase text-sm">Explorar</span>
           <h1 className="text-2xl font-bold">Mostra de Eventos</h1>
           <Card width="w-full">
-            <div className="relative"><Search className="absolute bottom-2.5 right-2" /><Input label="Pesquisar" placeholder="Pesquisar pelo nome do projeto" /></div>
+            <div className="relative">
+              <Search className="absolute bottom-2.5 right-2" />
+              <Input
+                label="Pesquisar"
+                placeholder="Pesquisar pelo nome do evento"
+              />
+            </div>
           </Card>
         </div>
         <section className="flex flex-col gap-4">
