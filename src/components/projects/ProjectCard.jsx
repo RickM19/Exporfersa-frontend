@@ -1,7 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import Button from "../UI/Button";
 import defaultProjectImage from "../../assets/people_on_table.jpg";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const ProjectCard = ({
   imageUrl,
@@ -10,6 +10,7 @@ const ProjectCard = ({
   eventName,
   summary,
   projectId,
+  handleDelete,
   status,
   manage
 }) => {
@@ -34,7 +35,9 @@ const ProjectCard = ({
             )}
           </div>
           <h1 className="text-l font-bold mb-1">{title}</h1>
-          <p className="text-xs text-muted-foreground mb-1">Nome do evento - {eventName}</p>
+          <p className="text-xs text-muted-foreground mb-1">
+            Nome do evento - {eventName}
+          </p>
           <p className="text-xs text-muted mb-2">{summary}</p>
           <NavLink
             className="text-sm text-secondary flex items-center cursor-pointer"
@@ -44,8 +47,16 @@ const ProjectCard = ({
           </NavLink>
           {manage && (
             <div className="mt-2 flex gap-2">
-              <Button value="Editar" type="secondary" width="w-1/2" />
-              <Button value="Excluir" type="destructive" width="w-1/2" />
+              <Link to={`${projectId}/editar`} className="w-1/2">
+                <Button value="Editar" type="secondary" width="w-full" />
+              </Link>
+
+              <Button
+                value="Excluir"
+                onClick={() => handleDelete(projectId)}
+                type="destructive"
+                width="w-1/2"
+              />
             </div>
           )}
         </div>
