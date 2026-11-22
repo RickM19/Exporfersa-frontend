@@ -10,30 +10,37 @@ const RegisterInstitution = () => {
         description="Cadastro realizado pelo administrador"
         action="Cadastrar instituição"
       >
-          <Input
-            label="Nome"
-            name="name"
-            placeholder="Digite o nome da instituição"
-            type="text"
-          />
-          <Input
-            label="Email"
-            name="email"
-            placeholder="Digite o email"
-            type="email"
-          />
-          <Input
-            label="Senha"
-            name="password"
-            placeholder="********"
-            type="password"
-          />
-          <Input
-            label="Confirmar senha"
-            name="password"
-            placeholder="********"
-            type="password"
-          />
+        <div className="rounded-md bg-secondary-100 p-4 flex gap-2">
+          <Info className="text-secondary" />
+          <div>
+            <p className="text-secondary">Perfil: Instituição</p>
+            <p className="text-sm text-muted-foreground">A instituição poderá gerenciar seus eventos e orientadores</p>
+          </div>
+        </div>
+        <Input
+          label="Nome"
+          name="name"
+          placeholder="Digite o nome da instituição"
+          type="text"
+        />
+        <Input
+          label="Email"
+          name="email"
+          placeholder="Digite o email"
+          type="email"
+        />
+        <Input
+          label="Senha"
+          name="password"
+          placeholder="********"
+          type="password"
+        />
+        <Input
+          label="Confirmar senha"
+          name="password"
+          placeholder="********"
+          type="password"
+        />
         <div className="flex gap-2">
           <input type="checkbox"/>
           <span className="text-muted">Confirmo que os dados estão corretos</span>
