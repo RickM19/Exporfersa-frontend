@@ -16,6 +16,12 @@ import ManageProjects from "../pages/projects/ManageProjects";
 import ViewEvents from "../pages/events/ViewEvents";
 import EventPage from "../pages/events/EventPage";
 import { ProtectedRoute } from "../components/routes/ProtectedRoute";
+import ManageInstitutions from "../pages/institutions/ManageInstitutions";
+import RegisterInstitution from "../pages/institutions/RegisterInstitution";
+import EditInstitution from "../pages/institutions/EditInstitution";
+import ManageAdvisors from "../pages/advisors/ManageAdvisors";
+import RegisterAdvisor from "../pages/advisors/RegisterAdvisor";
+import EditAdvisor from "../pages/advisors/EditAdvisor";
 
 const AppRoutes = () => {
   const [projects, setProjects] = useState(mockProjects);
@@ -62,7 +68,15 @@ const AppRoutes = () => {
           <Route element={<ProtectedRoute roles={["ADMIN"]} />}>
             <Route path="admin/eventos/criar" element={<CreateEvent />} />
             <Route path="admin/eventos/:id/editar" element={<EditEvent />} />
+            <Route path="admin/instituicoes" element={<ManageInstitutions />} />
+            <Route path="admin/instituicoes/cadastrar" element={<RegisterInstitution />} />
+            <Route path="admin/instituicoes/:id/editar" element={<EditInstitution />} />
           </Route>
+
+          {/* Orientador */}
+          <Route path="admin/orientadores" element={<ManageAdvisors />} />
+          <Route path="admin/orientadores/cadastrar" element={<RegisterAdvisor />} />
+          <Route path="admin/orientadores/:id/editar" element={<EditAdvisor />} />
 
           <Route path="*" element={<NotFound />} />
         </Route>
