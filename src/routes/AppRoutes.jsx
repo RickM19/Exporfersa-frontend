@@ -18,6 +18,7 @@ import EventPage from "../pages/events/EventPage";
 import { ProtectedRoute } from "../components/routes/ProtectedRoute";
 import ManageInstitutions from "../pages/institutions/ManageInstitutions";
 import RegisterInstitution from "../pages/institutions/RegisterInstitution";
+import EditInstitution from "../pages/institutions/EditInstitution";
 
 const AppRoutes = () => {
   const [projects, setProjects] = useState(mockProjects);
@@ -56,6 +57,7 @@ const AppRoutes = () => {
             <Route path="admin/instituicoes" element={<ManageInstitutions />} />
             <Route path="admin/instituicoes/cadastrar" element={<RegisterInstitution />} />
           </Route>
+            <Route path="admin/instituicoes/editar" element={<EditInstitution />} />
 
           <Route path="*" element={<NotFound />} />
           <Route path="/eventos/1" element={<EventPage />} />
