@@ -51,7 +51,7 @@ const Home = ({ projects, events }) => {
               category={project.category}
               eventName="Evento"
               summary={project.summary}
-              status={"APROVADO"}
+              status={project.status || "APROVADO"}
             />
           ))}
         </GridContainer>

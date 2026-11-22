@@ -26,26 +26,37 @@ const AppRoutes = () => {
       <Routes>
         <Route path="/" element={<Content />}>
           <Route index element={<Home projects={projects} events={events} />} />
-          <Route
-            path="/projetos"
-            element={<ViewProjects projects={projects} />}
-          />
 
           <Route path="/eventos" element={<ViewEvents events={events} />} />
+          <Route path="/eventos/1" element={<EventPage />} />
 
           <Route
             path="/projetos"
             element={<ViewProjects projects={projects} />}
           />
-          <Route path="projetos/:id" element={<ProjectPage />} />
+          <Route
+            path="projetos/:id"
+            element={<ProjectPage projects={projects} />}
+          />
 
           <Route element={<ProtectedRoute roles={["USER", "ADMIN"]} />}>
             <Route
               path="/meus-projetos"
-              element={<ManageProjects projects={projects} />}
+              element={
+                <ManageProjects projects={projects} setProjects={setProjects} />
+              }
             />
-            <Route path="projetos/criar" element={<CreateProject />} />
-            <Route path="projetos/:id/editar" element={<EditProject />} />
+            <Route
+              path="meus-projetos/cadastrar"
+              element={
+                <CreateProject
+                  events={events}
+                  setProjects={setProjects}
+                  projects={projects}
+                />
+              }
+            />
+            <Route path="meus-projetos/:id/editar" element={<EditProject />} />
           </Route>
 
           <Route element={<ProtectedRoute roles={["ADMIN"]} />}>
@@ -54,7 +65,6 @@ const AppRoutes = () => {
           </Route>
 
           <Route path="*" element={<NotFound />} />
-          <Route path="/eventos/1" element={<EventPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
