@@ -37,7 +37,7 @@ const RegisterInstitution = () => {
         />
         <Input
           label="Confirmar senha"
-          name="password"
+          name="confirmPass"
           placeholder="********"
           type="password"
         />

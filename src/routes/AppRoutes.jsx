@@ -21,6 +21,7 @@ import RegisterInstitution from "../pages/institutions/RegisterInstitution";
 import EditInstitution from "../pages/institutions/EditInstitution";
 import ManageAdvisors from "../pages/advisors/ManageAdvisors";
 import RegisterAdvisor from "../pages/advisors/RegisterAdvisor";
+import EditAdvisor from "../pages/advisors/EditAdvisor";
 
 const AppRoutes = () => {
   const [projects, setProjects] = useState(mockProjects);
@@ -58,10 +59,13 @@ const AppRoutes = () => {
             <Route path="admin/eventos/:id/editar" element={<EditEvent />} />
             <Route path="admin/instituicoes" element={<ManageInstitutions />} />
             <Route path="admin/instituicoes/cadastrar" element={<RegisterInstitution />} />
-            <Route path="admin/instituicoes/editar" element={<EditInstitution />} />
+            <Route path="admin/instituicoes/:id/editar" element={<EditInstitution />} />
           </Route>
-            <Route path="admin/orientadores" element={<ManageAdvisors />} />
-            <Route path="admin/orientadores/cadastrar" element={<RegisterAdvisor />} />
+
+          {/* Orientador */}
+          <Route path="admin/orientadores" element={<ManageAdvisors />} />
+          <Route path="admin/orientadores/cadastrar" element={<RegisterAdvisor />} />
+          <Route path="admin/orientadores/:id/editar" element={<EditAdvisor />} />
 
           <Route path="*" element={<NotFound />} />
           <Route path="/eventos/1" element={<EventPage />} />
