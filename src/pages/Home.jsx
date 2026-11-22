@@ -26,8 +26,8 @@ const Home = ({ projects, events }) => {
             </NavLink>
           </div>
         </Card>
-        <section className="flex flex-col gap-4 mt-6">
-          <h2 className="text-xl font-bold">Eventos</h2>
+        <h2 className="text-xl font-bold my-6">Eventos</h2>
+        <GridContainer>
           {events.slice(0, 3).map((event) => (
             <EventCard
               key={event.id}
@@ -40,7 +40,7 @@ const Home = ({ projects, events }) => {
               place="UFERSA"
             />
           ))}
-        </section>
+        </GridContainer>
         <h2 className="text-xl font-bold my-6">Projetos</h2>
         <GridContainer>
           {projects.slice(0, 3).map((project) => (

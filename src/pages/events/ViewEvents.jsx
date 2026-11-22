@@ -2,6 +2,7 @@ import { Search } from "lucide-react";
 import EventCard from "../../components/events/EventCard";
 import Card from "../../components/UI/Card";
 import Input from "../../components/UI/Input";
+import GridContainer from "../../components/GridContainer";
 
 const ViewEvents = ({ events }) => {
   return (
@@ -21,8 +22,8 @@ const ViewEvents = ({ events }) => {
             </div>
           </Card>
         </div>
-        <section className="flex flex-col gap-4">
-          <h2 className="text-xl font-bold">Eventos cadastrados</h2>
+        <h2 className="text-xl font-bold">Eventos cadastrados</h2>
+        <GridContainer>
           {events.slice(0, 3).map((event) => (
             <EventCard
               key={event.id}
@@ -35,7 +36,7 @@ const ViewEvents = ({ events }) => {
               place="UFERSA"
             />
           ))}
-        </section>
+        </GridContainer>
       </main>
     </>
   );
