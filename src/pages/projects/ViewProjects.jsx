@@ -6,9 +6,20 @@ import Input from "../../components/UI/Input";
 import { useState } from "react";
 
 const ViewProjects = ({ projects }) => {
-  const [selectedCategory, setSelectedCategory] = useState("Todas as categorias");
-  const categories = ["Todas as categorias", "Ciências Agrárias", "Engenharia", "Ciências humanas", "Ciências Exatas e da Terra", "Ciências Biológicas", "Ciências Sociais e Aplicadas", "Ciências da Saúde"];
-  
+  const [selectedCategory, setSelectedCategory] = useState(
+    "Todas as categorias"
+  );
+  const categories = [
+    "Todas as categorias",
+    "Ciências Agrárias",
+    "Engenharia",
+    "Ciências humanas",
+    "Ciências Exatas e da Terra",
+    "Ciências Biológicas",
+    "Ciências Sociais e Aplicadas",
+    "Ciências da Saúde"
+  ];
+
   return (
     <>
       <main className="flex flex-col gap-6">
@@ -19,21 +30,31 @@ const ViewProjects = ({ projects }) => {
         </div>
         <Card width="w-full">
           <div className="flex flex-col gap-4">
-            <div className="relative"><Search className="absolute bottom-2.5 right-2" /><Input label="Pesquisar" placeholder="Pesquisar pelo nome do projeto" /></div>
+            <div className="relative">
+              <Search className="absolute bottom-2.5 right-2" />
+              <Input
+                label="Pesquisar"
+                placeholder="Pesquisar pelo nome do projeto"
+              />
+            </div>
             <p className="text-sm font-bold">Categorias</p>
             <div className="flex flex-wrap gap-2">
-              {
-                categories.map((category, index) => (
-                  <div key={index} className={`border-2 p-2 w-max text-sm rounded-sm cursor-pointer ${selectedCategory == category ? 'text-secondary border-secondary' : 'text-muted-foreground'}`} onClick={() => setSelectedCategory(category)}>{category}</div>
-                ))
-              }
+              {categories.map((category, index) => (
+                <div
+                  key={index}
+                  className={`border-2 p-2 w-max text-sm rounded-sm cursor-pointer ${selectedCategory == category ? "text-secondary border-secondary" : "text-muted-foreground"}`}
+                  onClick={() => setSelectedCategory(category)}
+                >
+                  {category}
+                </div>
+              ))}
             </div>
           </div>
         </Card>
         <section>
           <h2 className="text-xl font-bold mb-4">Projetos cadastrados</h2>
           <GridContainer>
-            {projects.slice(0, 3).map((project) => (
+            {projects.map((project) => (
               <ProjectCard
                 key={project.id}
                 projectId={project.id}
@@ -41,7 +62,7 @@ const ViewProjects = ({ projects }) => {
                 category={project.category}
                 eventName="Evento"
                 summary={project.summary}
-                status={"APROVADO"}
+                status={project.status || "APROVADO"}
               />
             ))}
           </GridContainer>

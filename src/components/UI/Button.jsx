@@ -13,9 +13,17 @@ const variants = {
   ghost: "text-secondary border-transparent"
 };
 
-const Button = ({ type = "primary", value, width, className, ...props }) => {
+const Button = ({
+  type = "primary",
+  value,
+  width,
+  className,
+  htmlType = "button",
+  ...props
+}) => {
   return (
     <button
+      type={htmlType}
       className={cn(
         "p-3 text-sm border-2 transition-all rounded-md",
         variants[type] ?? variants.primary,

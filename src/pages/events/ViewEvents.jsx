@@ -24,7 +24,7 @@ const ViewEvents = ({ events }) => {
         </div>
         <h2 className="text-xl font-bold">Eventos cadastrados</h2>
         <GridContainer>
-          {events.slice(0, 3).map((event) => (
+          {events.map((event) => (
             <EventCard
               key={event.id}
               eventId={event.id}
