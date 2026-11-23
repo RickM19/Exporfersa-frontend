@@ -1,3 +1,5 @@
+const eventImage = "/src/assets/people_on_table.jpg";
+
 export const mockEvents = [
   {
     id: 1,
@@ -11,10 +13,7 @@ export const mockEvents = [
       startTime: "08:00",
       closeTime: "18:00"
     },
-    imagesURLs: [
-      "https://cataas.com/cat?width=800&height=600",
-      "https://cataas.com/cat?width=800&height=600"
-    ]
+    imagesURLs: [eventImage, eventImage]
   },
   {
     id: 2,
@@ -28,7 +27,7 @@ export const mockEvents = [
       startTime: "09:00",
       closeTime: "17:00"
     },
-    imagesURLs: ["https://cataas.com/cat?width=800&height=600"]
+    imagesURLs: [eventImage]
   },
   {
     id: 3,
@@ -42,7 +41,7 @@ export const mockEvents = [
       startTime: "08:00",
       closeTime: "19:00"
     },
-    imagesURLs: ["https://cataas.com/cat?width=800&height=600"]
+    imagesURLs: [eventImage]
   },
   {
     id: 4,
@@ -56,7 +55,7 @@ export const mockEvents = [
       startTime: "08:00",
       closeTime: "16:00"
     },
-    imagesURLs: ["https://cataas.com/cat?width=800&height=600"]
+    imagesURLs: [eventImage]
   },
   {
     id: 5,
@@ -70,6 +69,6 @@ export const mockEvents = [
       startTime: "08:00",
       closeTime: "18:00"
     },
-    imagesURLs: ["https://cataas.com/cat?width=800&height=600"]
+    imagesURLs: [eventImage]
   }
 ];

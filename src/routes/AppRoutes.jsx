@@ -42,7 +42,7 @@ const AppRoutes = () => {
           </Route>
 
           <Route path="/eventos" element={<ViewEvents events={events} />} />
-          <Route path="/eventos/1" element={<EventPage />} />
+          <Route path="/eventos/:id" element={<EventPage events={events} />} />
 
           <Route
             path="/projetos"
@@ -77,14 +77,26 @@ const AppRoutes = () => {
             <Route path="admin/eventos/criar" element={<CreateEvent />} />
             <Route path="admin/eventos/:id/editar" element={<EditEvent />} />
             <Route path="admin/instituicoes" element={<ManageInstitutions />} />
-            <Route path="admin/instituicoes/cadastrar" element={<RegisterInstitution />} />
-            <Route path="admin/instituicoes/:id/editar" element={<EditInstitution />} />
+            <Route
+              path="admin/instituicoes/cadastrar"
+              element={<RegisterInstitution />}
+            />
+            <Route
+              path="admin/instituicoes/:id/editar"
+              element={<EditInstitution />}
+            />
           </Route>
 
           {/* Orientador */}
           <Route path="admin/orientadores" element={<ManageAdvisors />} />
-          <Route path="admin/orientadores/cadastrar" element={<RegisterAdvisor />} />
-          <Route path="admin/orientadores/:id/editar" element={<EditAdvisor />} />
+          <Route
+            path="admin/orientadores/cadastrar"
+            element={<RegisterAdvisor />}
+          />
+          <Route
+            path="admin/orientadores/:id/editar"
+            element={<EditAdvisor />}
+          />
 
           <Route path="*" element={<NotFound />} />
         </Route>
