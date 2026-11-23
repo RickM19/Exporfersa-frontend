@@ -22,6 +22,9 @@ import EditInstitution from "../pages/institutions/EditInstitution";
 import ManageAdvisors from "../pages/advisors/ManageAdvisors";
 import RegisterAdvisor from "../pages/advisors/RegisterAdvisor";
 import EditAdvisor from "../pages/advisors/EditAdvisor";
+import { PublicRoute } from "../components/routes/PublicRoute";
+import Login from "../pages/auth/Login";
+import Register from "../pages/auth/Register";
 
 const AppRoutes = () => {
   const [projects, setProjects] = useState(mockProjects);
@@ -32,6 +35,11 @@ const AppRoutes = () => {
       <Routes>
         <Route path="/" element={<Content />}>
           <Route index element={<Home projects={projects} events={events} />} />
+
+          <Route element={<PublicRoute />}>
+            <Route path="login" element={<Login />} />
+            <Route path="cadastro" element={<Register />} />
+          </Route>
 
           <Route path="/eventos" element={<ViewEvents events={events} />} />
           <Route path="/eventos/1" element={<EventPage />} />
