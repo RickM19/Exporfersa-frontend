@@ -10,7 +10,9 @@ const Navbar = () => {
     <nav className="fixed z-50 top-0 left-0 w-full h-20 px-16 flex items-center justify-between border-b border-border bg-surface">
       <div className="flex items-center gap-10 h-full">
         <span className="flex items-center gap-2">
-          <h1 className="tracking-tight font text-2xl">ExporFersa</h1>
+          <h1 className="tracking-tight font text-2xl text-accent-foreground">
+            ExporFersa
+          </h1>
           <span className="size-1.5 bg-success rounded-xs" />
         </span>
         <ul className="flex items-center gap-8 h-full">
