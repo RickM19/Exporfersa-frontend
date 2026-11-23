@@ -16,6 +16,7 @@ import ManageProjects from "../pages/projects/ManageProjects";
 import ViewEvents from "../pages/events/ViewEvents";
 import EventPage from "../pages/events/EventPage";
 import { ProtectedRoute } from "../components/routes/ProtectedRoute";
+import SystemOverview from "../pages/admin/SystemOverview";
 
 const AppRoutes = () => {
   const [projects, setProjects] = useState(mockProjects);
@@ -49,6 +50,7 @@ const AppRoutes = () => {
           </Route>
 
           <Route element={<ProtectedRoute roles={["ADMIN"]} />}>
+            <Route path="admin/gestao" element={<SystemOverview />} /> 
             <Route path="admin/eventos/criar" element={<CreateEvent />} />
             <Route path="admin/eventos/:id/editar" element={<EditEvent />} />
           </Route>
