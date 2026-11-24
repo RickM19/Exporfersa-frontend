@@ -16,6 +16,7 @@ import ManageProjects from "../pages/projects/ManageProjects";
 import ViewEvents from "../pages/events/ViewEvents";
 import EventPage from "../pages/events/EventPage";
 import { ProtectedRoute } from "../components/routes/ProtectedRoute";
+import SystemOverview from "../pages/admin/SystemOverview";
 import ManageInstitutions from "../pages/institutions/ManageInstitutions";
 import RegisterInstitution from "../pages/institutions/RegisterInstitution";
 import EditInstitution from "../pages/institutions/EditInstitution";
@@ -25,6 +26,8 @@ import EditAdvisor from "../pages/advisors/EditAdvisor";
 import { PublicRoute } from "../components/routes/PublicRoute";
 import Login from "../pages/auth/Login";
 import Register from "../pages/auth/Register";
+import ProjectOverview from "../pages/admin/ProjectOverview";
+import EventOverview from "../pages/admin/EventOverview";
 
 const AppRoutes = () => {
   const [projects, setProjects] = useState(mockProjects);
@@ -74,6 +77,9 @@ const AppRoutes = () => {
           </Route>
 
           <Route element={<ProtectedRoute roles={["ADMIN"]} />}>
+            <Route path="admin/gestao" element={<SystemOverview />} /> 
+            <Route path="admin/projetos" element={<ProjectOverview />} />
+            <Route path="admin/eventos" element={<EventOverview />} />
             <Route path="admin/eventos/criar" element={<CreateEvent />} />
             <Route path="admin/eventos/:id/editar" element={<EditEvent />} />
             <Route path="admin/instituicoes" element={<ManageInstitutions />} />

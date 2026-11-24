@@ -72,7 +72,7 @@ const Navbar = () => {
           <div className="flex items-center gap-3">
             {user?.role === "ADMIN" && (
               <NavLink
-                to="/gestao"
+                to="admin/gestao"
                 className={({ isActive }) =>
                   `flex items-center gap-2 px-3 py-2 rounded-lg
             text-sm font-medium transition-colors  ${

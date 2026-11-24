@@ -2,16 +2,12 @@ import { School, User } from "lucide-react"
 import Card from "../../components/UI/Card"
 import { NavLink } from "react-router-dom";
 import Button from "../../components/UI/Button";
+import AdminLayout from "../../components/admin/AdmimLayout";
 
 const ManageAdvisors = () => {
     return (
-        <main>
+        <AdminLayout breadcrumb="Orientadores" title="Gerenciar orientadores" description="Adicione, edite e exclua orientadores">
             <section className="flex flex-col gap-4 mb-5">
-                <span className="text-sm text-muted block">Inicio / Gestão / Orientadores</span>
-                <span className="text-secondary text-xs uppercase">Gestão da instituição</span>
-                <h1 className="text-2xl font-bold">
-                    Gerenciar orientadores
-                </h1>
                 <NavLink to={"/admin/orientadores/cadastrar"}>
                     <Button value="Cadastrar orientador" type="primary" />
                 </NavLink>
@@ -63,7 +59,7 @@ const ManageAdvisors = () => {
                     </div>
                 </Card>
             </section>
-        </main>
+        </AdminLayout>
     )
 }
 
