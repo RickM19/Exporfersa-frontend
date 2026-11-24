@@ -11,16 +11,16 @@ const Collapse = ({title, description, className, select, selectOptions=[], chil
       {...props}
     >
       <section 
-        className={`w-full flex flex-row gap-5 items-center ${isOpen ? "pb-2 border-b-[1.5px] border-border" : ""}`}
+        className={`w-full flex flex-row gap-5 items-center ${isOpen ? "pb-3 border-b-[1.5px] border-border" : ""}`}
       >
         <h3 className="font-semibold text-xl text-primary">{title}</h3>
         <p className="text-base text-text-secondary col-start-1 row-start-2">{description? description : ""}</p>
         { select && 
-          <select className="text-sm bg-background border border-border rounded-md p-2">
+          <select className="text-sm bg-white border border-border rounded-md p-2">
             <option value="">Tudo</option>
             {selectOptions.map((opt) => (
-              <option key={opt.value} value={opt.value}>
-                {opt.name}
+              <option key={opt} value={opt}>
+                {opt}
               </option>
             ))}
           </select> 
