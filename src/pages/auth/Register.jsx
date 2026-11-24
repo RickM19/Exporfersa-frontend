@@ -120,9 +120,7 @@ const Register = () => {
         <p className="mt-1 min-h-5 text-xs text-danger">{errors.confirmData}</p>
 
         {registerError && (
-          <p className="mb-4 rounded-md bg-danger-50 p-3 text-sm text-danger">
-            {registerError}
-          </p>
+          <p className="text-danger text-sm mb-4">{registerError}</p>
         )}
 
         <Button htmlType="submit" value="Cadastrar visitante" width="w-full" />

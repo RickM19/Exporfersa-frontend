@@ -73,11 +73,7 @@ const Login = () => {
           error={errors.password}
         />
 
-        {loginError && (
-          <p className="mb-4 rounded-md bg-danger-50 p-3 text-sm text-danger">
-            {loginError}
-          </p>
-        )}
+        {loginError && <p className="text-danger text-sm mb-4">{loginError}</p>}
 
         <Button htmlType="submit" value="Entrar" width="w-full" />
       </form>

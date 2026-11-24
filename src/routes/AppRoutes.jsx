@@ -26,8 +26,10 @@ import EditAdvisor from "../pages/advisors/EditAdvisor";
 import { PublicRoute } from "../components/routes/PublicRoute";
 import Login from "../pages/auth/Login";
 import Register from "../pages/auth/Register";
+import MyAccount from "../pages/MyAccount";
 import ProjectOverview from "../pages/admin/ProjectOverview";
 import EventOverview from "../pages/admin/EventOverview";
+
 
 const AppRoutes = () => {
   const [projects, setProjects] = useState(mockProjects);
@@ -57,6 +59,7 @@ const AppRoutes = () => {
           />
 
           <Route element={<ProtectedRoute roles={["USER", "ADMIN"]} />}>
+            <Route path="perfil" element={<MyAccount />} />
             <Route
               path="/meus-projetos"
               element={

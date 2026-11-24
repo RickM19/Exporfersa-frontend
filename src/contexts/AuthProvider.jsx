@@ -3,12 +3,12 @@ import { AuthContext } from "./AuthContext";
 import { mockUsers } from "../mocks/users";
 
 const STORAGE_KEY = "exporfersa:user";
-// Usuários criados pela tela de cadastro (apenas enquanto a auth é mockada)
-const REGISTERED_USERS_KEY = "exporfersa:registered-users";
+// Usuários cadastrados ou editados no app (apenas enquanto a auth é mockada)
+const USERS_KEY = "exporfersa:users";
 
-const getRegisteredUsers = () => {
+const getStoredUsers = () => {
   try {
-    const stored = JSON.parse(localStorage.getItem(REGISTERED_USERS_KEY));
+    const stored = JSON.parse(localStorage.getItem(USERS_KEY));
 
     return Array.isArray(stored) ? stored : [];
   } catch {
@@ -16,7 +16,20 @@ const getRegisteredUsers = () => {
   }
 };
 
-const getAllUsers = () => [...mockUsers, ...getRegisteredUsers()];
+const getAllUsers = () => {
+  const stored = getStoredUsers();
+  const mocks = mockUsers.filter(
+    (mock) => !stored.some((user) => user.id === mock.id)
+  );
+
+  return [...mocks, ...stored];
+};
+
+const saveUser = (user) => {
+  const others = getStoredUsers().filter((stored) => stored.id !== user.id);
+
+  localStorage.setItem(USERS_KEY, JSON.stringify([...others, user]));
+};
 
 const getInitialUser = () => {
   try {
@@ -95,10 +108,7 @@ const AuthProvider = ({ children }) => {
     };
 
     try {
-      localStorage.setItem(
-        REGISTERED_USERS_KEY,
-        JSON.stringify([...getRegisteredUsers(), newUser])
-      );
+      saveUser(newUser);
       localStorage.setItem(STORAGE_KEY, newUser.id);
     } catch {
       return {
@@ -108,6 +118,45 @@ const AuthProvider = ({ children }) => {
     }
 
     const { password: _, ...authenticatedUser } = newUser;
+
+    setUser(authenticatedUser);
+
+    return { success: true };
+  };
+
+  const updateUser = ({ username, email }) => {
+    const normalizedEmail = email.trim().toLowerCase();
+
+    const emailInUse = getAllUsers().some(
+      (other) =>
+        other.id !== user.id && other.email.toLowerCase() === normalizedEmail
+    );
+
+    if (emailInUse) {
+      return {
+        success: false,
+        message: "Já existe uma conta com este e-mail."
+      };
+    }
+
+    const currentUser = getAllUsers().find((stored) => stored.id === user.id);
+
+    const updatedUser = {
+      ...currentUser,
+      username: username.trim(),
+      email: normalizedEmail
+    };
+
+    try {
+      saveUser(updatedUser);
+    } catch {
+      return {
+        success: false,
+        message: "Não foi possível salvar as alterações."
+      };
+    }
+
+    const { password: _, ...authenticatedUser } = updatedUser;
 
     setUser(authenticatedUser);
 
@@ -127,6 +176,7 @@ const AuthProvider = ({ children }) => {
     isAuthenticated: Boolean(user),
     login,
     register,
+    updateUser,
     logout
   };
 
