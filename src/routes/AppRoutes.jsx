@@ -16,6 +16,7 @@ import ManageProjects from "../pages/projects/ManageProjects";
 import ViewEvents from "../pages/events/ViewEvents";
 import EventPage from "../pages/events/EventPage";
 import { ProtectedRoute } from "../components/routes/ProtectedRoute";
+import SystemOverview from "../pages/admin/SystemOverview";
 import ManageInstitutions from "../pages/institutions/ManageInstitutions";
 import RegisterInstitution from "../pages/institutions/RegisterInstitution";
 import EditInstitution from "../pages/institutions/EditInstitution";
@@ -26,6 +27,9 @@ import { PublicRoute } from "../components/routes/PublicRoute";
 import Login from "../pages/auth/Login";
 import Register from "../pages/auth/Register";
 import MyAccount from "../pages/MyAccount";
+import ProjectOverview from "../pages/admin/ProjectOverview";
+import EventOverview from "../pages/admin/EventOverview";
+
 
 const AppRoutes = () => {
   const [projects, setProjects] = useState(mockProjects);
@@ -43,7 +47,7 @@ const AppRoutes = () => {
           </Route>
 
           <Route path="/eventos" element={<ViewEvents events={events} />} />
-          <Route path="/eventos/1" element={<EventPage />} />
+          <Route path="/eventos/:id" element={<EventPage events={events} />} />
 
           <Route
             path="/projetos"
@@ -76,17 +80,32 @@ const AppRoutes = () => {
           </Route>
 
           <Route element={<ProtectedRoute roles={["ADMIN"]} />}>
+            <Route path="admin/gestao" element={<SystemOverview />} /> 
+            <Route path="admin/projetos" element={<ProjectOverview />} />
+            <Route path="admin/eventos" element={<EventOverview />} />
             <Route path="admin/eventos/criar" element={<CreateEvent />} />
             <Route path="admin/eventos/:id/editar" element={<EditEvent />} />
             <Route path="admin/instituicoes" element={<ManageInstitutions />} />
-            <Route path="admin/instituicoes/cadastrar" element={<RegisterInstitution />} />
-            <Route path="admin/instituicoes/:id/editar" element={<EditInstitution />} />
+            <Route
+              path="admin/instituicoes/cadastrar"
+              element={<RegisterInstitution />}
+            />
+            <Route
+              path="admin/instituicoes/:id/editar"
+              element={<EditInstitution />}
+            />
           </Route>
 
           {/* Orientador */}
           <Route path="admin/orientadores" element={<ManageAdvisors />} />
-          <Route path="admin/orientadores/cadastrar" element={<RegisterAdvisor />} />
-          <Route path="admin/orientadores/:id/editar" element={<EditAdvisor />} />
+          <Route
+            path="admin/orientadores/cadastrar"
+            element={<RegisterAdvisor />}
+          />
+          <Route
+            path="admin/orientadores/:id/editar"
+            element={<EditAdvisor />}
+          />
 
           <Route path="*" element={<NotFound />} />
         </Route>

@@ -4,6 +4,7 @@ import Field from "../../components/UI/Field";
 import Input from "../../components/UI/Input";
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/UI/Button";
+import { useAuth } from "../../hooks/useAuth";
 
 const defaultFormState = {
   projectName: "",
@@ -25,6 +26,7 @@ const categories = [
 
 const CreateProject = ({ events = [], setProjects, projects = [] }) => {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [formData, setFormData] = useState(defaultFormState);
   const [authorName, setAuthorName] = useState("");
   const [authorsError, setAuthorsError] = useState("");
@@ -38,7 +40,6 @@ const CreateProject = ({ events = [], setProjects, projects = [] }) => {
 
     if (!name) return;
 
-    // Evita autores duplicados
     if (formData.authors.includes(name)) return;
 
     setFormData((prev) => ({
@@ -69,10 +70,14 @@ const CreateProject = ({ events = [], setProjects, projects = [] }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    if (formData.authors.length === 0) {
+      setAuthorsError("Adicione pelo menos um autor ao projeto.");
+      return;
+    }
     const newProject = {
       id: Math.max(0, ...projects.map((project) => project.id)) + 1,
       ...formData,
+      userId: user.id,
       status: "PENDENTE",
       createdAt: new Date().toISOString()
     };
