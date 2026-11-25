@@ -26,7 +26,7 @@ const UserMenu = () => {
         <UserRound size={22} />
 
         <span className="text-sm font-medium">
-          {user?.username.split(" ")[0]}
+          {user?.username?.split(" ")[0]}
         </span>
 
         <ChevronDown

@@ -1,186 +1,119 @@
-import { useState } from "react";
+import { useCallback, useEffect, useReducer } from "react";
+
+import { authService } from "../services/authService";
+import { tokenStorage } from "../services/tokenStorage";
 import { AuthContext } from "./AuthContext";
-import { mockUsers } from "../mocks/users";
 
-const STORAGE_KEY = "exporfersa:user";
-// Usuários cadastrados ou editados no app (apenas enquanto a auth é mockada)
-const USERS_KEY = "exporfersa:users";
+const initialState = {
+  user: null,
+  status: "loading"
+};
 
-const getStoredUsers = () => {
-  try {
-    const stored = JSON.parse(localStorage.getItem(USERS_KEY));
+function authReducer(state, action) {
+  switch (action.type) {
+    case "AUTHENTICATED":
+      return {
+        user: action.payload,
+        status: "authenticated"
+      };
 
-    return Array.isArray(stored) ? stored : [];
-  } catch {
-    return [];
+    case "UNAUTHENTICATED":
+      return {
+        user: null,
+        status: "unauthenticated"
+      };
+
+    case "ERROR":
+      return {
+        ...state,
+        status: "error"
+      };
+
+    default:
+      return state;
   }
-};
+}
 
-const getAllUsers = () => {
-  const stored = getStoredUsers();
-  const mocks = mockUsers.filter(
-    (mock) => !stored.some((user) => user.id === mock.id)
-  );
+export function AuthProvider({ children }) {
+  const [state, dispatch] = useReducer(authReducer, initialState);
 
-  return [...mocks, ...stored];
-};
+  const logout = useCallback(() => {
+    tokenStorage.remove();
+    dispatch({ type: "UNAUTHENTICATED" });
+  }, []);
 
-const saveUser = (user) => {
-  const others = getStoredUsers().filter((stored) => stored.id !== user.id);
+  const login = useCallback(async (credentials) => {
+    const data = await authService.login(credentials);
 
-  localStorage.setItem(USERS_KEY, JSON.stringify([...others, user]));
-};
+    tokenStorage.set(data.accessToken);
 
-const getInitialUser = () => {
-  try {
-    const userId = localStorage.getItem(STORAGE_KEY);
+    try {
+      const user = await authService.getCurrentUser();
 
-    if (!userId) return null;
+      dispatch({
+        type: "AUTHENTICATED",
+        payload: user
+      });
 
-    const foundUser = getAllUsers().find((user) => user.id === userId);
+      return user;
+    } catch (error) {
+      if (error.response?.status === 401) {
+        tokenStorage.remove();
+        dispatch({ type: "UNAUTHENTICATED" });
+      } else {
+        dispatch({ type: "ERROR" });
+      }
 
-    if (!foundUser) {
-      localStorage.removeItem(STORAGE_KEY);
-      return null;
+      throw error;
     }
+  }, []);
 
-    const { password, ...authenticatedUser } = foundUser;
+  const initializeAuth = useCallback(async (signal) => {
+    const token = tokenStorage.get();
 
-    return authenticatedUser;
-  } catch {
-    return null;
-  }
-};
-
-const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(getInitialUser);
-
-  const login = (email, password) => {
-    const foundUser = getAllUsers().find(
-      (user) =>
-        user.email.toLowerCase() === email.trim().toLowerCase() &&
-        user.password === password
-    );
-
-    if (!foundUser) {
-      return {
-        success: false,
-        message: "E-mail ou senha inválidos."
-      };
+    if (!token) {
+      dispatch({ type: "UNAUTHENTICATED" });
+      return;
     }
 
     try {
-      localStorage.setItem(STORAGE_KEY, foundUser.id);
-    } catch {
-      return {
-        success: false,
-        message: "Não foi possível iniciar a sessão."
-      };
+      const user = await authService.getCurrentUser({
+        signal
+      });
+
+      dispatch({
+        type: "AUTHENTICATED",
+        payload: user
+      });
+    } catch (error) {
+      if (signal.aborted) return;
+
+      if (error.response?.status === 401) {
+        tokenStorage.remove();
+        dispatch({ type: "UNAUTHENTICATED" });
+        return;
+      }
+
+      dispatch({ type: "ERROR" });
     }
+  }, []);
 
-    const { password: _, ...authenticatedUser } = foundUser;
+  useEffect(() => {
+    const controller = new AbortController();
 
-    setUser(authenticatedUser);
+    initializeAuth(controller.signal);
 
-    return { success: true };
-  };
-
-  const register = ({ username, email, password }) => {
-    const normalizedEmail = email.trim().toLowerCase();
-
-    const emailInUse = getAllUsers().some(
-      (user) => user.email.toLowerCase() === normalizedEmail
-    );
-
-    if (emailInUse) {
-      return {
-        success: false,
-        message: "Já existe uma conta com este e-mail."
-      };
-    }
-
-    const newUser = {
-      id: crypto.randomUUID(),
-      email: normalizedEmail,
-      username: username.trim(),
-      password,
-      role: "USER"
-    };
-
-    try {
-      saveUser(newUser);
-      localStorage.setItem(STORAGE_KEY, newUser.id);
-    } catch {
-      return {
-        success: false,
-        message: "Não foi possível concluir o cadastro."
-      };
-    }
-
-    const { password: _, ...authenticatedUser } = newUser;
-
-    setUser(authenticatedUser);
-
-    return { success: true };
-  };
-
-  const updateUser = ({ username, email }) => {
-    const normalizedEmail = email.trim().toLowerCase();
-
-    const emailInUse = getAllUsers().some(
-      (other) =>
-        other.id !== user.id && other.email.toLowerCase() === normalizedEmail
-    );
-
-    if (emailInUse) {
-      return {
-        success: false,
-        message: "Já existe uma conta com este e-mail."
-      };
-    }
-
-    const currentUser = getAllUsers().find((stored) => stored.id === user.id);
-
-    const updatedUser = {
-      ...currentUser,
-      username: username.trim(),
-      email: normalizedEmail
-    };
-
-    try {
-      saveUser(updatedUser);
-    } catch {
-      return {
-        success: false,
-        message: "Não foi possível salvar as alterações."
-      };
-    }
-
-    const { password: _, ...authenticatedUser } = updatedUser;
-
-    setUser(authenticatedUser);
-
-    return { success: true };
-  };
-
-  const logout = () => {
-    try {
-      localStorage.removeItem(STORAGE_KEY);
-    } finally {
-      setUser(null);
-    }
-  };
+    return () => controller.abort();
+  }, [initializeAuth]);
 
   const value = {
-    user,
-    isAuthenticated: Boolean(user),
+    user: state.user,
+    status: state.status,
+    isAuthenticated: state.status === "authenticated",
+    isLoading: state.status === "loading",
     login,
-    register,
-    updateUser,
     logout
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
-};
-
-export { AuthProvider };
+}
