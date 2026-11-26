@@ -1,23 +1,26 @@
-import { useCallback } from "react";
-import { useAuth } from "./useAuth";
+import { useState, useCallback } from "react";
 
 export function useApiRequest() {
-  const { logout } = useAuth();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  const execute = useCallback(
-    async (request) => {
-      try {
-        return await request();
-      } catch (error) {
-        if (error.response?.status === 401) {
-          logout();
-        }
+  const execute = useCallback(async (requestFn) => {
+    setLoading(true);
+    setError(null);
 
-        throw error;
-      }
-    },
-    [logout]
-  );
+    try {
+      return await requestFn();
+    } catch (error) {
+      setError(error);
+      throw error;
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
-  return execute;
+  return {
+    execute,
+    loading,
+    error
+  };
 }

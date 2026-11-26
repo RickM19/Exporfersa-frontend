@@ -1,8 +1,9 @@
-import { useCallback, useEffect, useReducer } from "react";
+import { useCallback, useEffect, useReducer, useRef } from "react";
 
 import { authService } from "../services/authService";
 import { tokenStorage } from "../services/tokenStorage";
 import { AuthContext } from "./AuthContext";
+import { setUnauthorizedHandler } from "../lib/axios";
 
 const initialState = {
   user: null,
@@ -37,15 +38,30 @@ function authReducer(state, action) {
 export function AuthProvider({ children }) {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
+  const logoutRef = useRef(false);
+
   const logout = useCallback(() => {
+    if (logoutRef.current) return;
+
+    logoutRef.current = true;
+
     tokenStorage.remove();
     dispatch({ type: "UNAUTHENTICATED" });
   }, []);
+
+  useEffect(() => {
+    setUnauthorizedHandler(logout);
+
+    return () => {
+      setUnauthorizedHandler(null);
+    };
+  }, [logout]);
 
   const login = useCallback(async (credentials) => {
     const data = await authService.login(credentials);
 
     tokenStorage.set(data.accessToken);
+    logoutRef.current = false;
 
     try {
       const user = await authService.getCurrentUser();
@@ -57,10 +73,7 @@ export function AuthProvider({ children }) {
 
       return user;
     } catch (error) {
-      if (error.response?.status === 401) {
-        tokenStorage.remove();
-        dispatch({ type: "UNAUTHENTICATED" });
-      } else {
+      if (error.response?.status !== 401) {
         dispatch({ type: "ERROR" });
       }
 
@@ -88,13 +101,9 @@ export function AuthProvider({ children }) {
     } catch (error) {
       if (signal.aborted) return;
 
-      if (error.response?.status === 401) {
-        tokenStorage.remove();
-        dispatch({ type: "UNAUTHENTICATED" });
-        return;
+      if (error.response?.status !== 401) {
+        dispatch({ type: "ERROR" });
       }
-
-      dispatch({ type: "ERROR" });
     }
   }, []);
 
