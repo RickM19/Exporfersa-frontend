@@ -60,7 +60,7 @@ export function AuthProvider({ children }) {
   const login = useCallback(async (credentials) => {
     const data = await authService.login(credentials);
 
-    tokenStorage.set(data.accessToken);
+    tokenStorage.set(data.token);
     logoutRef.current = false;
 
     try {

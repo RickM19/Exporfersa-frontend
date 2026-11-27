@@ -11,7 +11,10 @@ export function useApiRequest() {
     try {
       return await requestFn();
     } catch (error) {
-      setError(error);
+      if (error.name !== "CanceledError") {
+        setError(error);
+      }
+
       throw error;
     } finally {
       setLoading(false);
