@@ -2,7 +2,7 @@ import { api } from "../lib/axios";
 
 export const authService = {
   async login(credentials) {
-    const { data } = await api.post("/auth/login", credentials);
+    const { data } = await api.post("/user/login", credentials);
     return data;
   },
 

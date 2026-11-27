@@ -37,7 +37,7 @@ const Login = () => {
 
     if (Object.keys(newErrors).length > 0) return;
 
-    const result = login(form.email, form.password);
+    const result = login(form);
 
     if (!result.success) {
       setLoginError(result.message);
