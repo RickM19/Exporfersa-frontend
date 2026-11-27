@@ -9,16 +9,11 @@ import { useApiRequest } from "../hooks/useApiRequest";
 import LoadingSpinner from "../components/UI/LoadingSpinner";
 import projectService from "../services/projectService";
 import eventService from "../services/eventService";
+import RequestState from "../components/UI/RequestState";
 
 const { getProjects } = projectService;
 const { getEvents } = eventService;
-const LayoutContainer = ({ children }) => {
-  return (
-    <div className="flex items-center justify-center min-h-32 text-muted text-sm">
-      {children}
-    </div>
-  );
-};
+
 const Home = () => {
   const [projects, setProjects] = useState([]);
   const [events, setEvents] = useState([]);
@@ -43,8 +38,6 @@ const Home = () => {
         executeProjects(() => getProjects({}, controller.signal)),
         executeEvents(() => getEvents({}, controller.signal))
       ]);
-      console.log("Projetos:", projectsResult);
-      console.log("Eventos:", eventsResult);
 
       if (controller.signal.aborted) return;
 
@@ -89,22 +82,11 @@ const Home = () => {
 
         <h2 className="text-xl font-bold my-6">Eventos</h2>
 
-        {eventsLoading ? (
-          <LayoutContainer>
-            <div className="text-muted text-sm flex items-center gap-2">
-              <LoadingSpinner />
-              Carregando eventos...
-            </div>
-          </LayoutContainer>
-        ) : eventsError ? (
-          <LayoutContainer>
-            Não foi possível carregar os eventos.
-          </LayoutContainer>
-        ) : events.length === 0 ? (
-          <LayoutContainer>
-            Nenhum evento disponível no momento.
-          </LayoutContainer>
-        ) : (
+        <RequestState
+          loading={eventsLoading}
+          error={eventsError}
+          empty={events.length === 0 && "Nenhum evento disponível no momento."}
+        >
           <GridContainer>
             {events.slice(0, 3).map((event) => (
               <EventCard
@@ -119,24 +101,15 @@ const Home = () => {
               />
             ))}
           </GridContainer>
-        )}
+        </RequestState>
 
         <h2 className="text-xl font-bold my-6">Projetos</h2>
 
-        {projectsLoading ? (
-          <LayoutContainer>
-            <div className="text-muted text-sm flex items-center gap-2">
-              <LoadingSpinner />
-              Carregando projetos...
-            </div>
-          </LayoutContainer>
-        ) : projectsError ? (
-          <LayoutContainer>
-            Não foi possível carregar os projetos.
-          </LayoutContainer>
-        ) : projects.length === 0 ? (
-          <LayoutContainer>Nenhum projeto cadastrado!</LayoutContainer>
-        ) : (
+        <RequestState
+          loading={projectsLoading}
+          error={projectsError}
+          empty={projects.length === 0 && "Nenhum projeto cadastrado!"}
+        >
           <GridContainer>
             {projects.slice(0, 3).map((project) => (
               <ProjectCard
@@ -150,7 +123,7 @@ const Home = () => {
               />
             ))}
           </GridContainer>
-        )}
+        </RequestState>
       </div>
     </>
   );
